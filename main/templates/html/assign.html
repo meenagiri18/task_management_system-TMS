@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}
+Assign task
+
+{% endblock title %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <form class=" mx-auto form" method="post" action="{% url 'assign_task' %}">
+        {% csrf_token %}
+        <h3 class="heading text-center fw-bold fs-4 text-primary">Assign Tasks</h3>
+        <div class="flex-column">
+            <label>Title</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Task title" class="input" type="text" name="title">
+        </div>
+        <div class="flex-column">
+            <label>Task Description</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Describe your task" class="input" type="text" name="description">
+        </div>
+        <div class="flex-column">
+            <label>Status</label>
+        </div>
+       
+        <div class="inputForm">
+
+            <!-- <input class="input" type="text" name="status"> -->
+            <select id="status" name="status">
+                <option value="" selected>Select Status</option>
+                <option value="Not Started">Not started</option>
+                <option value="In Progress">In progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+        </div>
+        <div class="flex-column">
+            <label>Assign to</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Task aasign to" class="input" type="text" name="user">
+        </div>
+
+        
+        <div class="flex-column">
+            <label>Due Date</label>
+        </div>
+        <div class="inputForm">
+
+            <input class="input" type="date" name="ddate">
+        </div>
+
+
+        <button type="submit" class="button-submit">Assign</button>
+
+
+
+</div>
+</form>
+</div>
+
+{% endblock content %}

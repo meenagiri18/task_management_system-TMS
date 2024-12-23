@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}
+Edit task
+
+{% endblock title %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <form class=" mx-auto form" method="post" action="{% url 'edit_task' data.id %}">
+        {% csrf_token %}
+        <div class="flex-column">
+            <label>Title</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Task title" class="input" type="text" name="title" value="{{data.title}}">
+        </div>
+        <div class="flex-column">
+            <label>Task Description</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Describe your task" class="input" type="text" name="description" value="{{data.description}}">
+        </div>
+        <div class="flex-column">
+            <label>Status</label>
+        </div>
+       
+        <div class="inputForm">
+
+            <!-- <input class="input" type="text" name="status"> -->
+            <select id="status" name="status" value="{{data.status}}">
+                <option value="Not Started">Not started</option>
+                <option value="In Progress">In progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+        </div>
+
+        <div class="flex-column">
+            <label>Start Date</label>
+        </div>
+        <div class="inputForm">
+
+            <input class="input" type="date" name="sdate" value="{{data.start_date}}">
+        </div>
+        <div class="flex-column">
+            <label>End Date</label>
+        </div>
+        <div class="inputForm">
+
+            <input class="input" type="date" name="edate" value="{{data.end_date}}">
+        </div>
+
+
+        <button type="submit" class="button-submit">Update</button>
+
+
+
+</div>
+</form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}
+Create task
+
+{% endblock title %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+   
+            
+    <form class=" mx-auto form" method="post" action="{% url 'create_task' %}">
+        {% csrf_token %}
+        <h3 class="heading text-center fw-bold fs-4 text-primary">Create Tasks</h3>
+               
+        <div class="flex-column">
+            <label>Title</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Task title" class="input" type="text" name="title">
+        </div>
+        <div class="flex-column">
+            <label>Task Description</label>
+        </div>
+        <div class="inputForm">
+
+            <input placeholder="Describe your task" class="input" type="text" name="description">
+        </div>
+        <div class="flex-column">
+            <label>Status</label>
+        </div>
+       
+        <div class="inputForm">
+
+            <!-- <input class="input" type="text" name="status"> -->
+            <select id="status" name="status">
+                <option>Select Status</option>
+                <option value="Not Started">Not started</option>
+                <option value="In Progress">In progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+        </div>
+
+        <div class="flex-column">
+            <label>Start Date</label>
+        </div>
+        <div class="inputForm">
+
+            <input class="input" type="date" name="sdate">
+        </div>
+        <div class="flex-column">
+            <label>End Date</label>
+        </div>
+        <div class="inputForm">
+
+            <input class="input" type="date" name="edate">
+        </div>
+
+
+        <button type="submit" class="button-submit">Create</button>
+
+
+
+</div>
+</form>
+</div>
+
+{% endblock content %}

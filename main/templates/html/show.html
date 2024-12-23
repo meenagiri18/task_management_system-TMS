@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}
+View Task
+{% endblock title %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <h1 class="heading text-center fw-bolder fs-4 text-primary">View Tasks</h1>
+      <form method="POST" action="{% url 'view_task' %}" class="col-md-3">
+        {% csrf_token %}
+        <label for="sort" class="form-label text-primary fw-bold ">Sort By</label>
+        <select class="form-select" name="sort_by" id="sort">
+          <option value="" disabled selected>Select</option>
+          <option value="start_date ">Start Date</option>
+          <option value="end_date">End Date</option>
+        </select>
+        <div>
+          <button class="btn btn-outline-primary mt-4 " type="submit">
+            Apply Sorting
+          </button>
+        </div>
+
+      </form>
+
+      {% for i in data %}
+      <div class=" col-12  rounded boxes alert alert-primary">
+        <h3 class="text-primary">Task Title:{{i.title}}</h3>
+        <p>Task Description:{{i.description}}</p>
+        <p>Status:{{i.status}}</p>
+        <p>Start Date:{{i.start_date}}</p>
+        <p>End Date:{{i.end_date}}</p>
+
+       
+        <div class="btns d-flex justify-content-start gap-3">
+
+          <a href="{% url 'edit_task' i.id %}"><button class="btn btn-primary"><i
+                class="fa-solid fa-pen-to-square"></i>Edit</button></a>
+
+
+
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-{{i.id}}"  data-bs-title="Mark as Complete" data-bs-placement="top"><i class="fa-solid fa-check"></i>Mark Completed</button>
+          <!-- Modal -->
+          <div class="modal fade" id="modal-{{i.id}}" tabindex="-1" aria-labelledby="modalLabel-{{i.id}}"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalLabel-{{i.id}}">Mark as Complete</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure u want to mark the task as completed?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                  <a href="{% url 'current_completed' i.id %}"><button type="button" class="btn btn-outline-primary">Mark as
+                      completed</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modals-{{i.id}}"  data-bs-title="Mark as Complete" data-bs-placement="top"><i class="fa-solid fa-trash"></i>Delete</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="modals-{{i.id}}" tabindex="-1" aria-labelledby="modalLabels-{{i.id}}"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modalLabels-{{i.id}}">Delete Data</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure u want to delete the task?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <a href="{% url 'delete_data' i.id %}"><button type="button"
+                      class="btn btn-outline-danger">Delete</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+
+  {% endblock content %}
